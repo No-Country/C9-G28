@@ -5,7 +5,14 @@ module.exports = {
     screens: {
       sm: '360px',
     },
-    extend: {},
+    extend: {
+      backgroundColor: {
+        'main-bg': '#4338CA',
+      },
+      colors: {
+        blueDeep: '#0f172a',
+      },
+    },
   },
   plugins: [],
 };
