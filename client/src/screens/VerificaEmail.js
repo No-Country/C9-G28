@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import imageEmail from '../assets/verifica-email.png';
 
-import { login } from '../actions/userActions';
+import { validationEmail } from '../actions/userActions';
 
 import Input from '../components/Input';
 
@@ -39,7 +39,11 @@ const VerificarEmail = () => {
       Object.keys(errorsEmail).length < 1 &&
       input.email !== ''
     ) {
-      dispatch(login(input.email, input.password));
+      
+      const result = dispatch(validationEmail(input));
+      result ? navigate('/validatecode') 
+      :
+      alert('¡El correo electrónico ingresado no se encuentra registrado en el sistema!')
     } else {
       alert(
         '¡Error al enviar, Por favor revise el campo de Email!'
@@ -68,12 +72,13 @@ const VerificarEmail = () => {
             value={input}
             func={handleChange}
             err={{ email: errorsEmail.email }}
+            label="Email"
           />
 
           <div className="flex items-center justify-center mt-50">
             <button
               className="bg-gray-700 text-white w-40 py-2
-            border-2 rounded-lg hover:bg-violet-800 transition duration-500"
+              border-2 rounded-lg hover:bg-violet-800 transition duration-500"
             >
               Enviar Código 
             </button>

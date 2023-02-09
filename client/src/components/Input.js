@@ -3,7 +3,7 @@ import {AiOutlineMail, AiOutlineLock} from 'react-icons/ai';
 
 
 const Input = ({ type, name, label, value, func, err }) => {
-
+  
   return (
     <div>
       <label className="text-black" name={type}>
@@ -21,7 +21,6 @@ const Input = ({ type, name, label, value, func, err }) => {
         type={type}
         name={name}
         placeholder={`Ingresa tu ${name}`}
-        
         value={value}
         onChange={(e) => func(e)}
         

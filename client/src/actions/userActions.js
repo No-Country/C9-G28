@@ -1,10 +1,12 @@
 import axios from 'axios';
+import dummy from '../data/dummy';
 
 import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGOUT,
+  EMAIL_VERIFICATION
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -44,3 +46,21 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo');
   dispatch({ type: USER_LOGOUT });
 };
+
+
+
+// Action para enviar el email del usuario cuanto requiere restablecer la contraseña
+// se envia al back para validar si esta registrado
+export const validationEmail = (email) => (dispatch) =>{
+  
+  dispatch({type: EMAIL_VERIFICATION});
+
+  const emailOk = dummy.filter(user => user.email === email);
+  
+  if(emailOk.length){
+    return true;
+  }else{
+    return false;
+  }
+  
+}

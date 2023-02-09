@@ -24,3 +24,5 @@ const dummy = [
     userRol: 'Staff',
   },
 ];
+
+export default dummy;
