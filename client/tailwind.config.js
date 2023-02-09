@@ -2,9 +2,7 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    screens: {
-      sm: '360px',
-    },
+    
     extend: {
       backgroundColor: {
         'main-bg': '#4338CA',
