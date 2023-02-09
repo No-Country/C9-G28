@@ -1,12 +1,13 @@
 import React from 'react';
 import {AiOutlineMail, AiOutlineLock} from 'react-icons/ai';
 
-const Input = ({ type, name, value, func, err}) => {
-  
+
+const Input = ({ type, name, label, value, func, err }) => {
+
   return (
     <div>
       <label className="text-black" name={type}>
-        {name}
+        {label}
       </label>
       {
         name === 'email' ?
