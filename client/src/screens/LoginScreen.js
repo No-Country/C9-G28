@@ -8,19 +8,18 @@ import { login } from '../actions/userActions';
 
 import Input from '../components/Input';
 
-import {validateEmail, validatePassword} from '../utils/validationLogin';
+import { validateEmail, validatePassword } from '../utils/validationLogin';
 
 const LoginScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  
   const [errorsEmail, setErrorsEmail] = useState({});
   const [errorsPassword, setErrorsPassword] = useState({});
 
   const [input, setInput] = useState({
     email: '',
-    password: ''
+    password: '',
   });
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -32,42 +31,46 @@ const LoginScreen = () => {
     }
   }, [userInfo, navigate]);
 
-
   const handleChange = (e) => {
-    
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
 
-    if(e.target.name === 'email'){
-      setErrorsEmail(validateEmail({
-        ...input,
-        [e.target.name]: e.target.value,
-      }));
+    if (e.target.name === 'email') {
+      setErrorsEmail(
+        validateEmail({
+          ...input,
+          [e.target.name]: e.target.value,
+        })
+      );
     }
 
-    if(e.target.name === 'password'){
-      setErrorsPassword(validatePassword({
-        ...input,
-        [e.target.name]: e.target.value,
-      }));
+    if (e.target.name === 'password') {
+      setErrorsPassword(
+        validatePassword({
+          ...input,
+          [e.target.name]: e.target.value,
+        })
+      );
     }
-
-    
-    
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-   
-    
-    if(Object.keys(errorsEmail).length < 1 && Object.keys(errorsPassword).length  < 1 && input.email !== '' && input.password !== ''){
+
+    if (
+      Object.keys(errorsEmail).length < 1 &&
+      Object.keys(errorsPassword).length < 1 &&
+      input.email !== '' &&
+      input.password !== ''
+    ) {
       dispatch(login(input.email, input.password));
-    }else{
-      alert('¡Error al ingresar, Por favor revise los campos de Email y Contraseña!')
+    } else {
+      alert(
+        '¡Error al ingresar, Por favor revise los campos de Email y Contraseña!'
+      );
     }
-    
   };
 
   return (
@@ -83,18 +86,16 @@ const LoginScreen = () => {
           name="email"
           value={input.email}
           func={handleChange}
-          err={{email: errorsEmail.email}}
+          err={{ email: errorsEmail.email }}
         />
-        
-        
+
         <Input
           type="password"
           name="password"
           value={input.password}
           func={handleChange}
-          err={{password: errorsPassword.password}}
+          err={{ password: errorsPassword.password }}
         />
-        
 
         <input type="checkbox" name="" id="remember" className="mb-4 mr-2" />
         <label htmlFor="remember" className="text-black">

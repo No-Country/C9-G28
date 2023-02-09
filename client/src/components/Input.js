@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Input = ({ type, name, value, func, err }) => {
-  
   return (
     <div>
       <label className="text-black" name={type}>
@@ -15,8 +14,10 @@ const Input = ({ type, name, value, func, err }) => {
         value={value}
         onChange={(e) => func(e)}
       />
-      { err.email && (<p className='text-red-600 text-center'>* {err.email}</p>)}
-      {err.password && (<p className='text-red-600 text-center'>* {err.password}</p>)}
+      {err.email && <p className="text-red-600 text-center">* {err.email}</p>}
+      {err.password && (
+        <p className="text-red-600 text-center">* {err.password}</p>
+      )}
     </div>
   );
 };
