@@ -16,7 +16,7 @@ const HomeScreen = () => {
       <Header />
 
       <p className="text-[40px] font-bold mx-10 mt-10 text-blueDeep">
-        Buen día, {userInfo.email.split('@')[0]}!
+        Buen día, {userInfo[0].nombre}!
       </p>
       <p className="text-[30px] font-bold mx-10 mt-2 text-blueDeep">
         Aun no tienes turnos agendados

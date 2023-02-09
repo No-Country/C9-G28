@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Input = ({ type, name, value, func, err }) => {
+const Input = ({ type, name, label, value, func, err }) => {
   return (
     <div>
       <label className="text-black" name={type}>
-        {name}
+        {label}
       </label>
       <input
         className="w-full py-2 text-gray-600 px-1 outline-none mb-4 border-2 rounded-lg"
