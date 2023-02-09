@@ -90,6 +90,7 @@ const LoginScreen = () => {
           value={input.email}
           func={handleChange}
           err={{ email: errorsEmail.email }}
+          label="Email"
         />
 
         <Input
@@ -98,6 +99,7 @@ const LoginScreen = () => {
           value={input.password}
           func={handleChange}
           err={{ password: errorsPassword.password }}
+          label="Contraseña"
         />
 
         <input type="checkbox" name="" id="remember" className="mb-4 mr-2" />
