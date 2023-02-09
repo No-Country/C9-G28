@@ -74,13 +74,16 @@ const LoginScreen = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center  h-screen w-full">
-      <div className="flex flex-col items-center justify-center mb-4 ">
-        <img src={imageLogin} alt="logo login" className="h-64" />
-        <h1 className="mt-10 text-xl font-bold">Iniciar Sesión</h1>
+    <div className="flex flex-col md:flex-row items-center justify-center  h-screen w-full ">
+      <div className=" mb-4 sm:mr-42 md:w-1/2 ">
+        <img src={imageLogin} alt="logo login" className="h-64 md:h-auto" />
+        
       </div>
 
-      <form className="w-80" onSubmit={submitHandler}>
+      <div className="w-80 ml-6 items-center">
+
+      <form  onSubmit={submitHandler}>
+        <h1 className="my-10 text-xl font-bold text-center">Iniciar Sesión</h1>
         <Input
           type="email"
           name="email"
@@ -101,7 +104,7 @@ const LoginScreen = () => {
         <label htmlFor="remember" className="text-black">
           Recuérdame
         </label>
-        <Link to={'/'} className="mb-4 ml-4 text-blue-700">
+        <Link to={'/verificaremail'} className="mb-4 ml-4 text-blue-700">
           ¿Olvidaste tu contraseña?
         </Link>
 
@@ -114,10 +117,13 @@ const LoginScreen = () => {
           </button>
         </div>
       </form>
-
-      <Link to={'/registrar'} className="mt-10 text-blue-700">
-        Registrarme
-      </Link>
+      <div className='flex items-center justify-center'>
+        <Link to={'/registrar'} className="mt-10 text-blue-700 ">
+          Registrarme
+        </Link>
+      </div>
+        
+      </div>
     </div>
   );
 };
