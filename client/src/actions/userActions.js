@@ -60,3 +60,20 @@ export const validationEmail = (email) => (dispatch) => {
     return false;
   }
 };
+
+
+// Action que envía el código de verificación al backend para validar en usuario y poder 
+// resetear al contraseña (funciona con datos dummy mientras se adapta el endpoint en el back)
+export const verifyCode = (code) => (dispatch) => {
+  
+
+  let codeDummy = [123456, 987654, 112233];
+
+  const codeUser = codeDummy.find((c) => c === code);
+
+  if (codeUser) {
+    return true;
+  } else {
+    return false;
+  }
+};

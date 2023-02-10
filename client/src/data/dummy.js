@@ -7,7 +7,7 @@ const dummy = [
   },
   {
     name: 'Martha Rodriguez',
-    email: 'martRodriguez@email.com',
+    email: 'marta@mail.com',
     password: '12345678',
     userRol: 'User',
   },

@@ -6,6 +6,7 @@ import HomeScreen from './screens/HomeScreen';
 import VerificarEmail from './screens/VerificaEmail';
 import LoginScreen from './screens/LoginScreen';
 import ValidateCode from './screens/ValidateCode';
+import ResetPassword from './screens/ResetPassword';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path={'/home'} element={<HomeScreen />} />
         <Route path={'/verificaremail'} element={<VerificarEmail/>} />
         <Route path={'/validatecode'} element={<ValidateCode/>} />
+        <Route path={'/resetpassword'} element={<ResetPassword/>} />
       </Routes>
     </BrowserRouter>
   );
