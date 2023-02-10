@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const ValidateCode = () => {
-  return (
-    <div>ValidateCode Page</div>
-  )
-}
+  return <div>ValidateCode Page</div>;
+};
 
-export default ValidateCode
+export default ValidateCode;

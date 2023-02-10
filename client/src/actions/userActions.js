@@ -6,7 +6,7 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGOUT,
-  EMAIL_VERIFICATION
+  EMAIL_VERIFICATION,
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -47,20 +47,16 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT });
 };
 
-
-
 // Action para enviar el email del usuario cuanto requiere restablecer la contraseña
 // se envia al back para validar si esta registrado
-export const validationEmail = (email) => (dispatch) =>{
-  
-  dispatch({type: EMAIL_VERIFICATION});
+export const validationEmail = (email) => (dispatch) => {
+  dispatch({ type: EMAIL_VERIFICATION });
 
-  const emailOk = dummy.filter(user => user.email === email);
-  
-  if(emailOk.length){
+  const emailOk = dummy.filter((user) => user.email === email);
+
+  if (emailOk.length) {
     return true;
-  }else{
+  } else {
     return false;
   }
-  
-}
+};

@@ -77,54 +77,53 @@ const LoginScreen = () => {
     <div className="flex flex-col md:flex-row items-center justify-center  h-screen w-full ">
       <div className=" mb-4 sm:mr-42 md:w-1/2 ">
         <img src={imageLogin} alt="logo login" className="h-64 md:h-auto" />
-        
       </div>
 
       <div className="w-80 ml-6 items-center">
+        <form onSubmit={submitHandler}>
+          <h1 className="my-10 text-xl font-bold text-center">
+            Iniciar Sesión
+          </h1>
+          <Input
+            type="email"
+            name="email"
+            value={input.email}
+            func={handleChange}
+            err={{ email: errorsEmail.email }}
+            label="Email"
+          />
 
-      <form  onSubmit={submitHandler}>
-        <h1 className="my-10 text-xl font-bold text-center">Iniciar Sesión</h1>
-        <Input
-          type="email"
-          name="email"
-          value={input.email}
-          func={handleChange}
-          err={{ email: errorsEmail.email }}
-          label="Email"
-        />
+          <Input
+            type="password"
+            name="password"
+            value={input.password}
+            func={handleChange}
+            err={{ password: errorsPassword.password }}
+            label="Contraseña"
+          />
 
-        <Input
-          type="password"
-          name="password"
-          value={input.password}
-          func={handleChange}
-          err={{ password: errorsPassword.password }}
-          label="Contraseña"
-        />
+          <input type="checkbox" name="" id="remember" className="mb-4 mr-2" />
+          <label htmlFor="remember" className="text-black">
+            Recuérdame
+          </label>
+          <Link to={'/verificaremail'} className="mb-4 ml-4 text-blue-700">
+            ¿Olvidaste tu contraseña?
+          </Link>
 
-        <input type="checkbox" name="" id="remember" className="mb-4 mr-2" />
-        <label htmlFor="remember" className="text-black">
-          Recuérdame
-        </label>
-        <Link to={'/verificaremail'} className="mb-4 ml-4 text-blue-700">
-          ¿Olvidaste tu contraseña?
-        </Link>
-
-        <div className="flex items-center justify-center mt-10">
-          <button
-            className="bg-gray-700 text-white w-40 py-2
+          <div className="flex items-center justify-center mt-10">
+            <button
+              className="bg-gray-700 text-white w-40 py-2
           border-2 rounded-lg hover:bg-violet-800 transition duration-500"
-          >
-            Ingresar
-          </button>
+            >
+              Ingresar
+            </button>
+          </div>
+        </form>
+        <div className="flex items-center justify-center">
+          <Link to={'/registrar'} className="mt-10 text-blue-700 ">
+            Registrarme
+          </Link>
         </div>
-      </form>
-      <div className='flex items-center justify-center'>
-        <Link to={'/registrar'} className="mt-10 text-blue-700 ">
-          Registrarme
-        </Link>
-      </div>
-        
       </div>
     </div>
   );

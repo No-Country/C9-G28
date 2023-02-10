@@ -2,7 +2,7 @@ const dummy = [
   {
     name: 'Juan Sanchez',
     email: 'juanSanchez@email.com',
-    password: '12345678',
+    password: 'Admin@123',
     userRol: 'Admin',
   },
   {

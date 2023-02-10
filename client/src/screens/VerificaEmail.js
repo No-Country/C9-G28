@@ -18,7 +18,6 @@ const VerificarEmail = () => {
   const [input, setInput] = useState('');
 
   const handleChange = (e) => {
-
     let email = e.target.value;
     setInput(email);
 
@@ -28,26 +27,20 @@ const VerificarEmail = () => {
         [e.target.name]: e.target.value,
       })
     );
-
-    
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (
-      Object.keys(errorsEmail).length < 1 &&
-      input.email !== ''
-    ) {
-      
+    if (Object.keys(errorsEmail).length < 1 && input.email !== '') {
       const result = dispatch(validationEmail(input));
-      result ? navigate('/validatecode') 
-      :
-      alert('¡El correo electrónico ingresado no se encuentra registrado en el sistema!')
+      result
+        ? navigate('/validatecode')
+        : alert(
+            '¡El correo electrónico ingresado no se encuentra registrado en el sistema!'
+          );
     } else {
-      alert(
-        '¡Error al enviar, Por favor revise el campo de Email!'
-      );
+      alert('¡Error al enviar, Por favor revise el campo de Email!');
     }
   };
 
@@ -55,17 +48,17 @@ const VerificarEmail = () => {
     <div className="flex flex-col md:flex-row items-center justify-center  h-screen w-full">
       <div className="mb-4 sm:mr-42 md:w-1/2  ">
         <img src={imageEmail} alt="logo" className="h-64 md:h-auto" />
-        
       </div>
 
       <div className="w-80 ml-6 items-center">
         <h1 className="mt-10 text-3xl font-bold">Recuperar Contraseña</h1>
-        <p className='w-80 my-4 text-justify'>
+        <p className="w-80 my-4 text-justify">
           No te preocupes, te ayudamos! Ingresa tu correo electrónico con el que
-          te registraste en la aplicación y te enviaremos un <strong>código de
-          verificación para restablecer tu contraseña</strong>.
+          te registraste en la aplicación y te enviaremos un{' '}
+          <strong>código de verificación para restablecer tu contraseña</strong>
+          .
         </p>
-        <form  onSubmit={submitHandler}>
+        <form onSubmit={submitHandler}>
           <Input
             type="email"
             name="email"
@@ -80,11 +73,11 @@ const VerificarEmail = () => {
               className="bg-gray-700 text-white w-40 py-2
               border-2 rounded-lg hover:bg-violet-800 transition duration-500"
             >
-              Enviar Código 
+              Enviar Código
             </button>
           </div>
         </form>
-        <div className='flex items-center justify-center'>
+        <div className="flex items-center justify-center">
           <Link to={'/'} className="mt-6 text-blue-700 ">
             Regresar
           </Link>
