@@ -77,3 +77,15 @@ export const verifyCode = (code) => (dispatch) => {
     return false;
   }
 };
+
+
+// Action que recibe desde ResetPassword la contraseña actualizada del usuario cuando
+// pide restablecer la, por el momento está hardcodeada a la espera de implementar la
+// funcionalidad del back
+export const resetPassword = (password) => (dispatch) => {
+  
+  
+  return true;
+
+  
+};

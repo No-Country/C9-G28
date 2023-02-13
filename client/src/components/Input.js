@@ -20,7 +20,7 @@ const Input = ({ type, name, label, value, func, err }) => {
         className="w-full py-2 text-gray-600 px-1 outline-none mb-4 border-2 rounded-lg pl-10"
         type={type}
         name={name}
-        placeholder={`Ingresa tu ${name}`}
+        placeholder={err !== '' ? `Ingresa tu ${name}` : `${name}`}
         value={value}
         onChange={(e) => func(e)}
         
