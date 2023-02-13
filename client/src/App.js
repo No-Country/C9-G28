@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+
 import './App.css';
+
+import HomeScreen from './screens/HomeScreen';
+import VerificarEmail from './screens/VerificaEmail';
+import LoginScreen from './screens/LoginScreen';
+import ValidateCode from './screens/ValidateCode';
+import SpecialistScreen from './screens/SpecialistScreen';
+import ScheduleScreen from './screens/ScheduleScreen';
+import ResetPassword from './screens/ResetPassword';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path={'/'} element={<LoginScreen />} />
+        <Route path={'/home'} element={<HomeScreen />} />
+        <Route path={'/verificaremail'} element={<VerificarEmail/>} />
+        <Route path={'/validatecode'} element={<ValidateCode/>} />
+        <Route path={'/resetpassword'} element={<ResetPassword/>} />
+        <Route path={'/specialists'} element={<SpecialistScreen />} />
+        <Route path={'/schedule'} element={<ScheduleScreen />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
