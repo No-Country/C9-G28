@@ -1,10 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 
 import Card from '../components/Card';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 import avatar from '../assets/avatar.jpg';
 
@@ -16,7 +18,7 @@ const HomeScreen = () => {
   const { error, loading, userInfo } = userLogin;
 
   return (
-    <div className="mb-10">
+    <div>
       <Header />
 
       <p className="text-[40px] font-bold mx-10 mt-10 text-blueDeep">
@@ -31,9 +33,11 @@ const HomeScreen = () => {
       </div>
 
       <div className="flex items-center justify-center mt-10">
-        <button className="bg-main-bg text-white w-[200px] py-3 rounded-lg hover:bg-violet-100 transition duration-500 shadow-2xl">
-          Agendar tu turno
-        </button>
+        <Link to="/specialists">
+          <button className="bg-main-bg text-white w-[200px] py-3 rounded-lg hover:bg-violet-100 transition duration-500 shadow-2xl">
+            Agendar tu turno
+          </button>
+        </Link>
       </div>
 
       <p className="text-[25px] font-bold mx-10 mt-8 text-blueDeep">
@@ -89,10 +93,14 @@ const HomeScreen = () => {
       </p>
 
       <div className="flex items-center justify-center mt-10">
-        <button className="bg-[#EEF2FF] text-[#4338CA] w-[200px] py-3 rounded-lg hover:bg-violet-100 transition duration-500 shadow-2xl">
-          Buscar especialistas
-        </button>
+        <Link to="/specialists">
+          <p className="bg-[#EEF2FF] text-[#4338CA] w-[200px] py-3 pl-7 rounded-lg hover:bg-violet-100 transition duration-500 shadow-2xl">
+            Buscar especialistas
+          </p>
+        </Link>
       </div>
+
+      <Footer />
     </div>
   );
 };

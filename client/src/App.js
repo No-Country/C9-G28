@@ -16,9 +16,9 @@ function App() {
       <Routes>
         <Route path={'/'} element={<LoginScreen />} />
         <Route path={'/home'} element={<HomeScreen />} />
-        <Route path={'/verificaremail'} element={<VerificarEmail/>} />
-        <Route path={'/validatecode'} element={<ValidateCode/>} />
-        <Route path={'/resetpassword'} element={<ResetPassword/>} />
+        <Route path={'/verificaremail'} element={<VerificarEmail />} />
+        <Route path={'/validatecode'} element={<ValidateCode />} />
+        <Route path={'/resetpassword'} element={<ResetPassword />} />
         <Route path={'/specialists'} element={<SpecialistScreen />} />
         <Route path={'/schedule'} element={<ScheduleScreen />} />
       </Routes>

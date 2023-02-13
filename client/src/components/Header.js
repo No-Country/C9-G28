@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { AiOutlineMenu } from 'react-icons/ai';
 import { RiNotification3Line } from 'react-icons/ri';
@@ -36,13 +36,16 @@ const Header = () => {
 
   return (
     <header className="bg-main-bg">
-      <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
-        <NavButton
+      <div className="flex justify-between p-2 ml-2 md:ml-6 md:mr-6 relative">
+        <h1 className="text-white font-extrabold text-3xl p-1">
+          <Link to="/">MediCare</Link>
+        </h1>
+        {/* <NavButton
           title="Menu"
           customFunc={() => {}}
           color="white"
           icon={<AiOutlineMenu />}
-        />
+        /> */}
         <div className="flex">
           <NavButton
             title="Notification"
