@@ -32,7 +32,7 @@ const VerificarEmail = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (Object.keys(errorsEmail).length < 1 && input.email !== '') {
+    if (Object.keys(errorsEmail).length < 1 && input !== '') {
       const result = dispatch(validationEmail(input));
       result
         ? navigate('/validatecode')

@@ -102,15 +102,14 @@ const LoginScreen = () => {
             label="Contraseña"
           />
 
-          <input type="checkbox" name="" id="remember" className="mb-4 mr-2" />
-          <label htmlFor="remember" className="text-black">
-            Recuérdame
-          </label>
-          <Link to={'/verificaremail'} className="mb-4 ml-4 text-blue-700">
-            ¿Olvidaste tu contraseña?
-          </Link>
+          <div className='flex items-center justify-center'>
+            <Link to={'/verificaremail'} className="mb-4 ml-4 text-blue-700">
+              ¿Olvidaste tu contraseña?
+            </Link>
+          </div>
+          
 
-          <div className="flex items-center justify-center mt-10">
+          <div className="flex items-center justify-center mt-5">
             <button
               className="bg-gray-700 text-white w-40 py-2
           border-2 rounded-lg hover:bg-violet-800 transition duration-500"
