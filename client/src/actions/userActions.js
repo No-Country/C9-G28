@@ -15,15 +15,18 @@ export const login = (email, password) => async (dispatch) => {
       type: USER_LOGIN_REQUEST,
     });
 
+    const token = await axios.post('/generate-token', {
+      username: email,
+      password: password,
+    });
+
     const config = {
       headers: {
-        'Content-type': 'application/json',
+        Authorization: `Bearer ${token.data.token}`,
       },
     };
 
-    const usuarios = await axios.get('/usuarios/', config);
-
-    const data = usuarios.data.filter((usuario) => usuario.email === email);
+    const data = await axios.get('/actual-usuario', config);
 
     dispatch({
       type: USER_LOGIN_SUCCESS,
@@ -61,12 +64,9 @@ export const validationEmail = (email) => (dispatch) => {
   }
 };
 
-
-// Action que envía el código de verificación al backend para validar en usuario y poder 
+// Action que envía el código de verificación al backend para validar en usuario y poder
 // resetear al contraseña (funciona con datos dummy mientras se adapta el endpoint en el back)
 export const verifyCode = (code) => (dispatch) => {
-  
-
   let codeDummy = [123456, 987654, 112233];
 
   const codeUser = codeDummy.find((c) => c === code);
@@ -78,14 +78,9 @@ export const verifyCode = (code) => (dispatch) => {
   }
 };
 
-
 // Action que recibe desde ResetPassword la contraseña actualizada del usuario cuando
 // pide restablecer la, por el momento está hardcodeada a la espera de implementar la
 // funcionalidad del back
 export const resetPassword = (password) => (dispatch) => {
-  
-  
   return true;
-
-  
 };
