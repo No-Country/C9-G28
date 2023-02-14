@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
+//En este controller se encuentran los end point para generar token y el usuario para vincular al token
+
 @RestController
 @CrossOrigin("*")
 public class AuthenticationController {
@@ -31,6 +33,7 @@ public class AuthenticationController {
     @Autowired
     private JwtUtils jwtUtils;
 
+    //End point para generar token: "/generate-token"
     @PostMapping("/generate-token")
     public ResponseEntity<?> generarToken(@RequestBody JwtRequest jwtRequest) throws Exception {
         try{
@@ -55,6 +58,7 @@ public class AuthenticationController {
         }
     }
 
+    //End point para obtener el usuario asociado al token: "/actual-usuario"
     @GetMapping("/actual-usuario")
     public Usuario obtenerUsuarioActual(Principal principal){
         return (Usuario) this.userDetailsService.loadUserByUsername(principal.getName());
