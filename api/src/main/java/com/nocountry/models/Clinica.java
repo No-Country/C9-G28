@@ -1,11 +1,11 @@
 package com.nocountry.models;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -16,25 +16,23 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="medicos")
-public class Medico {
+@Table(name="clinicas")
+public class Clinica {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String nombre;
     @Column
-    private String apellido;
+    private String direccion;
     @Column
-    private String matricula;
+    private String telefono;
     @Column
-    private String especialidad;
+    private String descripcion;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "medico",fetch = FetchType.LAZY)
-    private Set<Turno> turnos= new HashSet<>();
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "clinica_id", nullable = false)
-    private Clinica clinica;
+    @OneToMany(mappedBy = "clinica",fetch = FetchType.LAZY)
+    private Set<Medico>medicos= new HashSet<>();
 }
+

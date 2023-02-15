@@ -56,6 +56,11 @@ public class Usuario implements UserDetails {
     @JsonIgnore
     private Set<UsuarioRol> usuarioRols=new HashSet<>();
 
+    //nueva relacion usuario turnos
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY, orphanRemoval = true, cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+    private Set<Turno> turnos=new HashSet<>();
+
 
     @Override
     public String toString() {
