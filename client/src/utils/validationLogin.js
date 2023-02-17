@@ -37,6 +37,7 @@ export function validateResetPassword (input){
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-8])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/;
 
     if (input.hasOwnProperty("password1") || input.hasOwnPropinput("password2")) {
+        
         if (input.password1.length === 0) errors.password1 = "El campo contraseña es obligatorio";
         else if (passwordExp.test(input.password1) === false) {
           errors.password1 =
@@ -55,4 +56,29 @@ export function validateResetPassword (input){
     
 
     return errors;
+}
+
+
+
+
+export function validateText(input){
+
+  let errors = {};
+  const textExpt = /^[A-Z- ]+$/i;
+  if(input.hasOwnProperty("nombre")  || input.hasOwnProperty("apellido") || input.hasOwnPropinput("telefono")){
+    
+    if (input.nombre.length === 0) {errors.nombre = "El campo nombre es obligatorio";}
+    else if (textExpt.test(input.nombre) === false) errors.nombre = "El campo nombre debe ser solo de texto y no contener números ni símbolos";
+    if (input.apellido.length === 0) errors.apellido = "El campo apellido es obligatorio";
+    else if (textExpt.test(input.apellido) === false) errors.apellido = "El campo apellido debe ser ser solo de texto y no contener números ni símbolos";
+    if (input.telefono.length === 0) errors.telefono = "El campo telefono es obligatorio";
+    
+    
+    
+
+  }
+
+
+
+  return errors;
 }

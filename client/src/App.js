@@ -9,6 +9,8 @@ import ValidateCode from './screens/ValidateCode';
 import SpecialistScreen from './screens/SpecialistScreen';
 import ScheduleScreen from './screens/ScheduleScreen';
 import ResetPassword from './screens/ResetPassword';
+import FormRegister from './screens/FormRegister';
+
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path={'/resetpassword'} element={<ResetPassword />} />
         <Route path={'/specialists'} element={<SpecialistScreen />} />
         <Route path={'/schedule'} element={<ScheduleScreen />} />
+        <Route path={'/register'} element={<FormRegister/>} />
+        
       </Routes>
     </BrowserRouter>
   );

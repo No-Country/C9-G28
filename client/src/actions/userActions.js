@@ -1,5 +1,5 @@
-import axios from 'axios';
-import dummy from '../data/dummy';
+import axios from "axios";
+import dummy from "../data/dummy";
 
 import {
   USER_LOGIN_REQUEST,
@@ -7,7 +7,7 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGOUT,
   EMAIL_VERIFICATION,
-} from '../constants/userConstants';
+} from "../constants/userConstants";
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -15,22 +15,25 @@ export const login = (email, password) => async (dispatch) => {
       type: USER_LOGIN_REQUEST,
     });
 
+    const token = await axios.post("/generate-token", {
+      username: email,
+      password: password,
+    });
+
     const config = {
       headers: {
-        'Content-type': 'application/json',
+        Authorization: `Bearer ${token.data.token}`,
       },
     };
 
-    const usuarios = await axios.get('/usuarios/', config);
-
-    const data = usuarios.data.filter((usuario) => usuario.email === email);
+    const data = await axios.get("/actual-usuario", config);
 
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data,
     });
 
-    localStorage.setItem('userInfo', JSON.stringify(data));
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -43,7 +46,7 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-  localStorage.removeItem('userInfo');
+  localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
 };
 
@@ -61,12 +64,9 @@ export const validationEmail = (email) => (dispatch) => {
   }
 };
 
-
-// Action que envía el código de verificación al backend para validar en usuario y poder 
+// Action que envía el código de verificación al backend para validar en usuario y poder
 // resetear al contraseña (funciona con datos dummy mientras se adapta el endpoint en el back)
 export const verifyCode = (code) => (dispatch) => {
-  
-
   let codeDummy = [123456, 987654, 112233];
 
   const codeUser = codeDummy.find((c) => c === code);
@@ -78,14 +78,25 @@ export const verifyCode = (code) => (dispatch) => {
   }
 };
 
-
 // Action que recibe desde ResetPassword la contraseña actualizada del usuario cuando
 // pide restablecer la, por el momento está hardcodeada a la espera de implementar la
 // funcionalidad del back
 export const resetPassword = (password) => (dispatch) => {
-  
-  
   return true;
+};
 
-  
+// Action que envía la data al backend para la creación de usuario en la base de
+// datos, ya está enviado el json con los datos al back
+
+export const createUserForm = (data) => async (dispatch) => {
+  try {
+    const create = await axios.post("/usuarios/", data);
+
+    if (create.data.id) {
+      return true;
+    }
+  } catch (error) {
+    // console.log('Error al crear cuenta>>>>>', error)
+    return false;
+  }
 };
