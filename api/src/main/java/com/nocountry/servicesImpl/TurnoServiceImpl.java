@@ -1,6 +1,8 @@
 package com.nocountry.servicesImpl;
 
 import com.nocountry.models.Turno;
+import com.nocountry.models.Usuario;
+import com.nocountry.models.UsuarioRol;
 import com.nocountry.repository.TurnoRepository;
 import com.nocountry.services.TurnoService;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TurnoServiceImpl implements TurnoService {
@@ -20,9 +23,21 @@ public class TurnoServiceImpl implements TurnoService {
     }
 
     @Override
-    public Turno saveTurno(Turno turno) {
-        return repository.save(turno);
+    public Turno saveTurno(Turno turno) throws Exception {
+
+        Turno turnoLocal= repository.findByFecha(turno.getFecha());
+        if(turnoLocal != null){
+            System.out.println("El turno ya existe");
+            throw new Exception("El turno ya esta registrado");
+        }
+        else {
+
+            turnoLocal=repository.save(turno);
+        }
+
+        return turnoLocal;
     }
+
 
     @Override
     public void deleteTurno(Long turnoId) {

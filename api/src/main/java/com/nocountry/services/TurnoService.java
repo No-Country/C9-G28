@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface TurnoService {
 
-    public Turno saveTurno(Turno turno);
+    public Turno saveTurno(Turno turno) throws Exception;
 
     public void deleteTurno(Long turnoId);
 

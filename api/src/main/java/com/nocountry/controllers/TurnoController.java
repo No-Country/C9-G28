@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,7 @@ public class TurnoController {
 
     ////End point para guardar  turnos POST= "/turnos/"
     @PostMapping
-    public Turno guardar(@RequestBody Turno turno){
+    public Turno guardar(@RequestBody Turno turno) throws Exception {
         return service.saveTurno(turno);
     }
 

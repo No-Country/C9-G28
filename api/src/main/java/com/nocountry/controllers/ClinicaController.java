@@ -34,7 +34,7 @@ public class ClinicaController {
 
     //End point para crear clinica POST= "/clinica/"
     @PostMapping
-    public Clinica guardar(@RequestBody Clinica clinica){
+    public Clinica guardar(@RequestBody Clinica clinica) throws Exception {
         return service.saveClinica(clinica);
     }
 

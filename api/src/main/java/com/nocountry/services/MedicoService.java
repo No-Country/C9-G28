@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface MedicoService {
 
-    public Medico saveMedico(Medico medico);
+    public Medico saveMedico(Medico medico) throws Exception;
 
    public void deleteMedico(Long medicoId);
 

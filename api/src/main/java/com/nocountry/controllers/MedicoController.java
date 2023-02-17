@@ -37,7 +37,7 @@ public class MedicoController {
 
     //End point para guardar medico POST: "/medicos/"
     @PostMapping
-    public Medico guardar(@RequestBody Medico medico){
+    public Medico guardar(@RequestBody Medico medico) throws Exception {
         return service.saveMedico(medico);
     }
 

@@ -10,7 +10,7 @@ public interface ClinicaService {
 
     public List<Clinica> getAllClinicas();
 
-    public Clinica saveClinica(Clinica clinica);
+    public Clinica saveClinica(Clinica clinica) throws Exception;
 
     public Clinica getNombreClinica(String nombre);
 

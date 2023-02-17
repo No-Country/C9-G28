@@ -9,4 +9,6 @@ public interface MedicoRepository extends JpaRepository<Medico,Long> {
     public Medico findByApellido(String apellido);
 
     public Medico findByEspecialidad(String especialidad);
+
+    public  Medico findByNombreAndApellido (String nombre,String apellido);
 }
