@@ -15,7 +15,9 @@ export const login = (email, password) => async (dispatch) => {
       type: USER_LOGIN_REQUEST,
     });
 
-    const token = await axios.post("/generate-token", {
+
+    const token = await axios.post('/generate-token', {
+
       username: email,
       password: password,
     });
@@ -26,7 +28,9 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
 
-    const data = await axios.get("/actual-usuario", config);
+
+    const data = await axios.get('/actual-usuario', config);
+
 
     dispatch({
       type: USER_LOGIN_SUCCESS,
@@ -83,7 +87,9 @@ export const verifyCode = (code) => (dispatch) => {
 // funcionalidad del back
 export const resetPassword = (password) => (dispatch) => {
   return true;
+
 };
+
 
 // Action que envía la data al backend para la creación de usuario en la base de
 // datos, ya está enviado el json con los datos al back
@@ -99,4 +105,5 @@ export const createUserForm = (data) => async (dispatch) => {
     // console.log('Error al crear cuenta>>>>>', error)
     return false;
   }
+
 };
