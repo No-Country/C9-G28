@@ -119,7 +119,7 @@ const LoginScreen = () => {
           </div>
         </form>
         <div className="flex items-center justify-center">
-          <Link to={'/registrar'} className="mt-10 text-blue-700 ">
+          <Link to={'/register'} className="mt-10 text-blue-700 ">
             Registrarme
           </Link>
         </div>

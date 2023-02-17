@@ -1,5 +1,5 @@
-import axios from 'axios';
-import dummy from '../data/dummy';
+import axios from "axios";
+import dummy from "../data/dummy";
 
 import {
   USER_LOGIN_REQUEST,
@@ -7,7 +7,7 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGOUT,
   EMAIL_VERIFICATION,
-} from '../constants/userConstants';
+} from "../constants/userConstants";
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -15,7 +15,9 @@ export const login = (email, password) => async (dispatch) => {
       type: USER_LOGIN_REQUEST,
     });
 
+
     const token = await axios.post('/generate-token', {
+
       username: email,
       password: password,
     });
@@ -26,14 +28,16 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
 
+
     const data = await axios.get('/actual-usuario', config);
+
 
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data,
     });
 
-    localStorage.setItem('userInfo', JSON.stringify(data));
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -46,7 +50,7 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-  localStorage.removeItem('userInfo');
+  localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
 };
 
@@ -83,4 +87,23 @@ export const verifyCode = (code) => (dispatch) => {
 // funcionalidad del back
 export const resetPassword = (password) => (dispatch) => {
   return true;
+
+};
+
+
+// Action que envía la data al backend para la creación de usuario en la base de
+// datos, ya está enviado el json con los datos al back
+
+export const createUserForm = (data) => async (dispatch) => {
+  try {
+    const create = await axios.post("/usuarios/", data);
+
+    if (create.data.id) {
+      return true;
+    }
+  } catch (error) {
+    // console.log('Error al crear cuenta>>>>>', error)
+    return false;
+  }
+
 };

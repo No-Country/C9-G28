@@ -22,33 +22,17 @@ const ResetPassword = () => {
   });
 
   const handleChange = (e) => {
-    if (e.target.name === "password") {
-      setInput({
-        ...input,
-        password1: e.target.value,
-      });
-    } else {
-      setInput({
-        ...input,
-        password2: e.target.value,
-      });
-    }
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
 
-    if (e.target.name === "password") {
-      setErrorsPassword(
-        validateResetPassword({
-          ...input,
-          password1: e.target.value,
-        })
-      );
-    } else {
-      setErrorsPassword(
-        validateResetPassword({
-          ...input,
-          password2: e.target.value,
-        })
-      );
-    }
+    setErrorsPassword(
+      validateResetPassword({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   const handleSubmit = (e) => {
@@ -95,10 +79,10 @@ const ResetPassword = () => {
 
           <Input
             type="password"
-            name="password"
+            name="password1"
             value={input.password1}
             func={handleChange}
-            err={""}
+            err={"false"}
             label="Nueva contraseña"
           />
           {errorsPassword.password1 && (
@@ -109,10 +93,10 @@ const ResetPassword = () => {
 
           <Input
             type="password"
-            name="repite la password"
+            name="password2"
             value={input.password2}
             func={handleChange}
-            err={""}
+            err={"false"}
             label="Confirmar nueva contraseña"
           />
 
