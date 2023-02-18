@@ -1,5 +1,6 @@
 package com.nocountry.servicesImpl;
 
+import com.nocountry.excepciones.RegistroFoundException;
 import com.nocountry.models.Turno;
 import com.nocountry.models.Usuario;
 import com.nocountry.models.UsuarioRol;
@@ -28,10 +29,9 @@ public class TurnoServiceImpl implements TurnoService {
         Turno turnoLocal= repository.findByFecha(turno.getFecha());
         if(turnoLocal != null){
             System.out.println("El turno ya existe");
-            throw new Exception("El turno ya esta registrado");
+            throw new RegistroFoundException();
         }
         else {
-
             turnoLocal=repository.save(turno);
         }
 

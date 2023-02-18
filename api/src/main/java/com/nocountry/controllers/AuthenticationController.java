@@ -3,6 +3,7 @@ package com.nocountry.controllers;
 
 
 import com.nocountry.config.JwtUtils;
+import com.nocountry.excepciones.RegistroNotFoundException;
 import com.nocountry.models.JwtRequest;
 import com.nocountry.models.JwtResponse;
 import com.nocountry.models.Usuario;
@@ -38,7 +39,7 @@ public class AuthenticationController {
     public ResponseEntity<?> generarToken(@RequestBody JwtRequest jwtRequest) throws Exception {
         try{
             autenticar(jwtRequest.getUsername(),jwtRequest.getPassword());
-        }catch (Exception exception){
+        }catch (RegistroNotFoundException exception){
             exception.printStackTrace();
             throw new Exception("Usuario no encontrado");
         }

@@ -1,5 +1,6 @@
 package com.nocountry.servicesImpl;
 
+import com.nocountry.excepciones.RegistroFoundException;
 import com.nocountry.models.Medico;
 import com.nocountry.models.Turno;
 import com.nocountry.models.Usuario;
@@ -27,7 +28,7 @@ public class MedicoServiceImpl implements MedicoService {
         Medico medicLocal= repository.findByNombreAndApellido(medico.getNombre(), medico.getApellido());
         if(medicLocal != null){
             System.out.println("El medico ya existe");
-            throw new Exception("El medico ya esta registrado");
+            throw new RegistroFoundException();
         }
         else {
 

@@ -1,7 +1,7 @@
 package com.nocountry.servicesImpl;
 
+import com.nocountry.excepciones.RegistroFoundException;
 import com.nocountry.models.Clinica;
-import com.nocountry.models.Turno;
 import com.nocountry.repository.ClinicaRepository;
 import com.nocountry.services.ClinicaService;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,7 @@ public class ClinicaServiceImpl implements ClinicaService {
         Clinica clinicLocal= repository.findByNombre(clinica.getNombre());
         if(clinicLocal != null){
             System.out.println("La clinica ya existe");
-            throw new Exception("La clinica ya esta registrada");
+            throw new RegistroFoundException();
         }
         else {
 
