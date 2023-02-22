@@ -24,6 +24,7 @@ const LoginScreen = () => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  
 
   useEffect(() => {
     if (userInfo) {
@@ -66,6 +67,12 @@ const LoginScreen = () => {
       input.password !== ''
     ) {
       dispatch(login(input.email, input.password));
+      if(!userLogin.loading){
+       
+        alert(
+          '¡Error Email o Contraseña incorrectos!'
+        );
+      }
     } else {
       alert(
         '¡Error al ingresar, Por favor revise los campos de Email y Contraseña!'
