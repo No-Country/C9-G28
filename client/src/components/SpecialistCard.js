@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { IoLocationOutline } from 'react-icons/io5';
-import SpecialistScreen from '../screens/SpecialistScreen';
 
 const SpecialistCard = ({
   id,

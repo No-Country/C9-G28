@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { IoLocationOutline } from 'react-icons/io5';
 import { HiOutlineOfficeBuilding } from 'react-icons/hi';
 
 import avatar from '../assets/avatar.jpg';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Calendar from '../components/Calendar';
 
 const ScheduleScreen = () => {
   const { id } = useParams();
@@ -81,16 +82,8 @@ const ScheduleScreen = () => {
 
         <div className="flex flex-col justify-center">
           <p className="text-[19px] font-bold mx-10 mt-8 text-blueDeep">
-            !!! CALENDARIO !!!
+            <Calendar />
           </p>
-
-          <div className="flex items-center justify-center mt-10">
-            <Link to="/schedule">
-              <button className="bg-main-bg text-white w-[170px] py-3 rounded-lg hover:bg-violet-100 transition duration-500 shadow-2xl">
-                Solicitar turno
-              </button>
-            </Link>
-          </div>
         </div>
       </div>
 

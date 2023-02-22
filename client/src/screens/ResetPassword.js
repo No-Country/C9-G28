@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import imagePass from "../assets/reset-pass.png";
+import imagePass from '../assets/reset-pass.png';
 
-import { resetPassword } from "../actions/userActions";
+import { resetPassword } from '../actions/userActions';
 
-import Input from "../components/Input";
+import Input from '../components/Input';
 
-import { validateResetPassword } from "../utils/validationLogin";
+import { validateResetPassword } from '../utils/validationLogin';
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -17,8 +17,8 @@ const ResetPassword = () => {
   const [errorsPassword, setErrorsPassword] = useState({});
 
   const [input, setInput] = useState({
-    password1: "",
-    password2: "",
+    password1: '',
+    password2: '',
   });
 
   const handleChange = (e) => {
@@ -40,22 +40,22 @@ const ResetPassword = () => {
 
     if (
       Object.keys(errorsPassword).length < 1 &&
-      input.password1 !== "" &&
-      input.password2 !== ""
+      input.password1 !== '' &&
+      input.password2 !== ''
     ) {
       const result = dispatch(resetPassword(input.password1));
       setInput({
-        password1: "",
-        password2: "",
+        password1: '',
+        password2: '',
       });
       if (result) {
-        alert("¡Contraseña actualizada exitosamente !");
-        navigate("/");
+        alert('¡Contraseña actualizada exitosamente !');
+        navigate('/');
       } else {
-        alert("¡Error al actualizar la contraseña!");
+        alert('¡Error al actualizar la contraseña!');
       }
     } else {
-      alert("¡Error al ingresar, Por favor revise los campos de Contraseña!");
+      alert('¡Error al ingresar, Por favor revise los campos de Contraseña!');
     }
   };
 
@@ -82,7 +82,7 @@ const ResetPassword = () => {
             name="password1"
             value={input.password1}
             func={handleChange}
-            err={"false"}
+            err={'false'}
             label="Nueva contraseña"
           />
           {errorsPassword.password1 && (
@@ -96,7 +96,7 @@ const ResetPassword = () => {
             name="password2"
             value={input.password2}
             func={handleChange}
-            err={"false"}
+            err={'false'}
             label="Confirmar nueva contraseña"
           />
 

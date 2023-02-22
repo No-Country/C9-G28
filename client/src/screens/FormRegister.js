@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
-
+import { useDispatch } from 'react-redux';
 
 import { createUserForm } from '../actions/userActions';
 
 import Input from '../components/Input';
 
-import { validateEmail, validateResetPassword, validateText } from '../utils/validationLogin';
+import {
+  validateEmail,
+  validateResetPassword,
+  validateText,
+} from '../utils/validationLogin';
 
 const FormRegister = () => {
   const navigate = useNavigate();
@@ -24,23 +26,17 @@ const FormRegister = () => {
     email: '',
     telefono: '',
     password1: '',
-    password2: ''
+    password2: '',
   });
   const [imageUser, setImageUser] = useState();
 
-
-
-  
-
   const handleChange = (e) => {
-
-    
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
 
-    if(e.target.name === 'email'){
+    if (e.target.name === 'email') {
       setErrorsEmail(
         validateEmail({
           ...input,
@@ -48,8 +44,8 @@ const FormRegister = () => {
         })
       );
     }
-    
-    if(e.target.name === 'password1' || e.target.name === 'password2'){
+
+    if (e.target.name === 'password1' || e.target.name === 'password2') {
       setErrorsPassword(
         validateResetPassword({
           ...input,
@@ -58,26 +54,26 @@ const FormRegister = () => {
       );
     }
 
-    if(e.target.name === 'nombre' || e.target.name === 'apellido' || e.target.name === 'telefono'){
+    if (
+      e.target.name === 'nombre' ||
+      e.target.name === 'apellido' ||
+      e.target.name === 'telefono'
+    ) {
       setErrorsText(
         validateText({
           ...input,
           [e.target.name]: e.target.value,
-          
         })
-      )
-
+      );
     }
-    
   };
 
   const handleUploadImage = (e) => {
-   if(e.target.files){
-    
-    setImageUser(e.target.files[0])
-    console.log('image>>>', imageUser)
-   }
-  }
+    if (e.target.files) {
+      setImageUser(e.target.files[0]);
+      console.log('image>>>', imageUser);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -90,7 +86,6 @@ const FormRegister = () => {
       input.password1 !== '' &&
       input.password2 !== ''
     ) {
-
       const data = {
         username: input.email,
         password: input.password1,
@@ -100,17 +95,15 @@ const FormRegister = () => {
         perfil: imageUser,
         activo: true,
         email: input.email,
-
-      }
+      };
       const result = await dispatch(createUserForm(data));
-      
-      if(result){
+
+      if (result) {
         alert('Cuenta creada con exito');
         navigate('/');
-      }else{
+      } else {
         alert('Error no se pudo crear la cuenta');
       }
-      
     } else {
       alert(
         '¡Error al ingresar los datos en los campos, por favor revise la información ingresada !'
@@ -120,19 +113,15 @@ const FormRegister = () => {
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center  h-screen w-full bg-white ">
-      
-
       <div className="w-80  items-center">
         <form onSubmit={handleSubmit}>
-          <h1 className="my-10 text-xl font-bold text-center">
-            Registrarse 
-          </h1>
+          <h1 className="my-10 text-xl font-bold text-center">Registrarse</h1>
           <Input
             type="text"
             name="nombre"
             value={input.nombre}
             func={handleChange}
-            err={{nombre: errorsText.nombre }}
+            err={{ nombre: errorsText.nombre }}
             label="Nombre"
           />
           <Input
@@ -140,7 +129,7 @@ const FormRegister = () => {
             name="apellido"
             value={input.apellido}
             func={handleChange}
-            err={{apellido: errorsText.apellido }}
+            err={{ apellido: errorsText.apellido }}
             label="Apellido"
           />
 
@@ -157,7 +146,7 @@ const FormRegister = () => {
             name="telefono"
             value={input.telefono}
             func={handleChange}
-            err={{telefono: errorsText.telefono}}
+            err={{ telefono: errorsText.telefono }}
             label="Telefono"
           />
 
@@ -189,19 +178,21 @@ const FormRegister = () => {
               * {errorsPassword.password2}
             </p>
           )}
-              <label>Sube una imagen de perfil</label>
-            <div className={imageUser  ?'bg-violet-800 text-white border-2 rounded-lg': 
-              "bg-gray-700 text-white border-2 rounded-lg"}
-             >
-              <input 
-                type='file' 
-                name='file'
-                accept=".jpg, .jpeg, .png"
-                onChange={(e) => handleUploadImage(e)}
-                
-              />  
-            </div>
-                  
+          <label>Sube una imagen de perfil</label>
+          <div
+            className={
+              imageUser
+                ? 'bg-violet-800 text-white border-2 rounded-lg'
+                : 'bg-gray-700 text-white border-2 rounded-lg'
+            }
+          >
+            <input
+              type="file"
+              name="file"
+              accept=".jpg, .jpeg, .png"
+              onChange={(e) => handleUploadImage(e)}
+            />
+          </div>
 
           <div className="flex items-center justify-center mt-5">
             <button
