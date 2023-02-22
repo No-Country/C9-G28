@@ -3,14 +3,24 @@ import { Link } from 'react-router-dom';
 import { IoLocationOutline } from 'react-icons/io5';
 import SpecialistScreen from '../screens/SpecialistScreen';
 
-const SpecialistCard = ({ image, name, hospital, place, specialist }) => {
+const SpecialistCard = ({
+  id,
+  image,
+  name,
+  lastName,
+  hospital,
+  place,
+  specialist,
+}) => {
   return (
     <div className="bg-white rounded-md shadow-2xl my-[16px] mx-auto w-[450px] h-[200px] p-[1px]">
       <div>
         <div className="flex flex-row m-6">
           <div className="mr-5">
             <div className="flex flex-row items-start mt-5">
-              <h5 className="font-semibold mx-5">{name}</h5>
+              <h5 className="font-semibold mx-2">
+                {name} {lastName}
+              </h5>
               <div className="bg-green-100 text-green-800 rounded-3xl w-[120px] text-center mx-auto">
                 <p>{specialist}</p>
               </div>
@@ -29,7 +39,10 @@ const SpecialistCard = ({ image, name, hospital, place, specialist }) => {
           />
         </div>
         <div className="flex justify-between mx-20">
-          <Link to="/schedule" className="btn btn-primary text-violet-900">
+          <Link
+            to={`/schedule/${id}`}
+            className="btn btn-primary text-violet-900"
+          >
             Solicitar turno
           </Link>
 

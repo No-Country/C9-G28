@@ -102,12 +102,11 @@ const LoginScreen = () => {
             label="Contraseña"
           />
 
-          <div className='flex items-center justify-center'>
+          <div className="flex items-center justify-center">
             <Link to={'/verificaremail'} className="mb-4 ml-4 text-blue-700">
               ¿Olvidaste tu contraseña?
             </Link>
           </div>
-          
 
           <div className="flex items-center justify-center mt-5">
             <button

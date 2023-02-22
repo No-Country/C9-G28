@@ -8,71 +8,58 @@ import Card from '../components/Card';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-import avatar from '../assets/avatar.jpg';
-
 import imageHome from '../assets/logo-home.png';
 import imageSearch from '../assets/home-search.png';
+import clinic from '../assets/clinic.jpg';
 
 const HomeScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
-  const { error, loading, userInfo } = userLogin;
+  const { userInfo, clinicInfo } = userLogin;
 
   return (
     <div>
       <Header />
 
-      <p className="text-[40px] font-bold mx-10 mt-10 text-blueDeep">
-        Buen día, {userInfo.data.nombre}!
-      </p>
-      <p className="text-[30px] font-bold mx-10 mt-2 text-blueDeep">
-        Aun no tienes turnos agendados
+      <p className="text-[40px] font-bold mx-10 md:mx-20 mt-10 text-blueDeep">
+        Buen día, {userInfo.nombre}!
       </p>
 
-      <div className="flex justify-center my-7">
-        <img src={imageHome} alt="logo home" className="w-100" />
+      <div className="flex flex-col md:items-center md:bg-[#EEF2FF] md:mx-[200px] md:my-10 md:p-10">
+        <p className="text-[27px] mx-10 md:text-[35px] font-bold md:text-[#6B7280] md:mb-10">
+          Aún no tienes turnos agendados
+        </p>
+
+        <div className="flex flex-col items-center">
+          <div>
+            <img src={imageHome} alt="logo home" className="w-100" />
+          </div>
+
+          <div className="mt-10">
+            <Link to="/specialists">
+              <button className="bg-main-bg text-white w-[200px] py-3 rounded-lg hover:bg-violet-100 transition duration-500 shadow-2xl">
+                Agendar tu turno
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
 
-      <div className="flex items-center justify-center mt-10">
-        <Link to="/specialists">
-          <button className="bg-main-bg text-white w-[200px] py-3 rounded-lg hover:bg-violet-100 transition duration-500 shadow-2xl">
-            Agendar tu turno
-          </button>
-        </Link>
-      </div>
-
-      <p className="text-[25px] font-bold mx-10 mt-8 text-blueDeep">
+      <p className="text-[25px] font-bold mx-10 md:mx-20 mt-8 text-blueDeep">
         Centros de salud cerca de ti
       </p>
 
-      <ScrollMenu>
-        <Card
-          image={avatar}
-          hospital="Clínica del Sur"
-          place="Av. del lago"
-          specialist="Nutricionista"
-        />
-
-        <Card
-          image={avatar}
-          hospital="Clínica del Sur"
-          place="Av. del lago"
-          specialist="Nutricionista"
-        />
-
-        <Card
-          image={avatar}
-          hospital="Clínica del Sur"
-          place="Av. del lago"
-          specialist="Nutricionista"
-        />
-
-        <Card
-          image={avatar}
-          hospital="Clínica del Sur"
-          place="Av. del lago"
-          specialist="Nutricionista"
-        />
-      </ScrollMenu>
+      <div className="mx-10 md:mx-20">
+        <ScrollMenu>
+          {clinicInfo.data.map((item) => (
+            <Card
+              key={item.id}
+              image={clinic}
+              hospital={item.nombre}
+              place={item.direccion}
+            />
+          ))}
+        </ScrollMenu>
+      </div>
 
       <div className="flex items-center justify-center mt-10">
         <button className="bg-[#EEF2FF] text-[#4338CA] w-[150px] py-3 rounded-lg hover:bg-violet-100 transition duration-500 shadow-2xl">
@@ -80,24 +67,20 @@ const HomeScreen = () => {
         </button>
       </div>
 
-      <p className="text-[25px] font-bold mx-10 mt-8 text-blueDeep">
-        Profesionales vistos recientemente
+      <p className="text-[25px] font-bold mx-10 md:mx-20 mt-8 text-blueDeep">
+        Vistos recientemente
       </p>
 
-      <div className="flex justify-center my-7">
-        <img src={imageSearch} alt="logo home" className="w-100" />
-      </div>
-
-      <p className="text-[15px] text-center mx-10 mt-8 text-blueDeep">
+      <p className="text-[25px] font-bold mx-10 md:mx-20 text-[#6B7280] mb-10">
         Aún no has visto ningún especialista
       </p>
 
-      <div className="flex items-center justify-center mt-10">
-        <Link to="/specialists">
-          <p className="bg-[#EEF2FF] text-[#4338CA] w-[200px] py-3 pl-7 rounded-lg hover:bg-violet-100 transition duration-500 shadow-2xl">
-            Buscar especialistas
-          </p>
-        </Link>
+      <div className="flex justify-center my-7">
+        <img
+          src={imageSearch}
+          alt="logo home"
+          className="w-[300px] md:w-[400px]"
+        />
       </div>
 
       <Footer />

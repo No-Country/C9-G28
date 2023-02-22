@@ -11,7 +11,6 @@ import ScheduleScreen from './screens/ScheduleScreen';
 import ResetPassword from './screens/ResetPassword';
 import FormRegister from './screens/FormRegister';
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -22,9 +21,8 @@ function App() {
         <Route path={'/validatecode'} element={<ValidateCode />} />
         <Route path={'/resetpassword'} element={<ResetPassword />} />
         <Route path={'/specialists'} element={<SpecialistScreen />} />
-        <Route path={'/schedule'} element={<ScheduleScreen />} />
-        <Route path={'/register'} element={<FormRegister/>} />
-        
+        <Route path={'/schedule/:id'} element={<ScheduleScreen />} />
+        <Route path={'/register'} element={<FormRegister />} />
       </Routes>
     </BrowserRouter>
   );
