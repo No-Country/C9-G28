@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { IoLocationOutline } from 'react-icons/io5';
 import { HiOutlineOfficeBuilding } from 'react-icons/hi';
@@ -7,22 +7,20 @@ import { HiOutlineOfficeBuilding } from 'react-icons/hi';
 import avatar from '../assets/avatar.jpg';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Calendar from '../components/Calendar';
+import UpdateCalendar from '../components/UpdateCalendar';
 
-import { getTurn } from '../actions/userActions';
-
-const ScheduleScreen = () => {
-  const dispatch = useDispatch();
-  const { id } = useParams();
-
-  useEffect(() => {
-    dispatch(getTurn());
-  }, [dispatch]);
+const UpdateScheduleScreen = () => {
+  const { medicId, turnId } = useParams();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { doctorInfo } = userLogin;
 
-  const doctor = doctorInfo.data[id - 1];
+  const turn = useSelector((state) => state.getTurn);
+  const { listTurns } = turn;
+
+  const doctor = doctorInfo.data[medicId - 1];
+
+  const date = listTurns?.filter((item) => item.id === Number(turnId));
 
   return (
     <div>
@@ -88,7 +86,7 @@ const ScheduleScreen = () => {
         </div>
 
         <div className="mx-auto mt-10">
-          <Calendar id={id} />
+          <UpdateCalendar turnId={turnId} medicId={medicId} date={date} />
         </div>
       </div>
 
@@ -97,4 +95,4 @@ const ScheduleScreen = () => {
   );
 };
 
-export default ScheduleScreen;
+export default UpdateScheduleScreen;

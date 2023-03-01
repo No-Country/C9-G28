@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { ScrollMenu } from 'react-horizontal-scrolling-menu';
@@ -11,29 +11,54 @@ import Footer from '../components/Footer';
 import imageHome from '../assets/logo-home.png';
 import imageSearch from '../assets/home-search.png';
 import clinic from '../assets/clinic.jpg';
+import TurnCard from '../components/TurnCard';
+import { getTurn } from '../actions/userActions';
 
 const HomeScreen = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTurn());
+  }, [dispatch]);
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo, clinicInfo } = userLogin;
+
+  const turns = useSelector((state) => state.getTurn);
+  const { listTurns } = turns;
 
   return (
     <div>
       <Header />
 
       <p className="text-[40px] font-bold mx-10 md:mx-20 mt-10 text-blueDeep">
-        Buen día, {userInfo.nombre}!
+        Buen día, {userInfo[0].nombre}!
       </p>
 
       <div className="flex flex-col md:items-center md:bg-[#EEF2FF] md:mx-[200px] md:my-10 md:p-10">
-        <p className="text-[27px] mx-10 md:text-[35px] font-bold md:text-[#6B7280] md:mb-10">
-          Aún no tienes turnos agendados
-        </p>
-
         <div className="flex flex-col items-center">
-          <div>
-            <img src={imageHome} alt="logo home" className="w-100" />
-          </div>
-
+          <p className="text-[27px] mx-10 md:text-[35px] font-bold md:text-[#6B7280] md:mb-10">
+            {listTurns === undefined
+              ? 'Tus turnos'
+              : 'Aún no tienes turnos agendados'}
+          </p>
+          {listTurns?.length > 0 ? (
+            listTurns?.map((item) => (
+              <TurnCard
+                key={item.id}
+                id={item.id}
+                firstName={item.medico.nombre}
+                lastName={item.medico.apellido}
+                time={item.fecha}
+                specialist={item.medico.especialidad}
+                medicId={item.medico.id}
+              />
+            ))
+          ) : (
+            <div>
+              <img src={imageHome} alt="logo home" className="w-100" />
+            </div>
+          )}
           <div className="mt-10">
             <Link to="/specialists">
               <button className="bg-main-bg text-white w-[200px] py-3 rounded-lg hover:bg-violet-100 transition duration-500 shadow-2xl">
@@ -48,7 +73,7 @@ const HomeScreen = () => {
         Centros de salud cerca de ti
       </p>
 
-      <div className="mx-10 md:mx-20">
+      <div id="entidades" className="mx-10 md:mx-20">
         <ScrollMenu>
           {clinicInfo.data.map((item) => (
             <Card

@@ -7,6 +7,18 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGOUT,
   EMAIL_VERIFICATION,
+  TURN_CREATE_REQUEST,
+  TURN_CREATE_SUCCESS,
+  TURN_CREATE_FAIL,
+  TURN_DELETE_REQUEST,
+  TURN_DELETE_SUCCESS,
+  TURN_DELETE_FAIL,
+  TURN_GET_REQUEST,
+  TURN_GET_SUCCESS,
+  TURN_GET_FAIL,
+  TURN_UPDATE_REQUEST,
+  TURN_UPDATE_SUCCESS,
+  TURN_UPDATE_FAIL,
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -15,31 +27,29 @@ export const login = (email, password) => async (dispatch) => {
       type: USER_LOGIN_REQUEST,
     });
 
-    const token = await axios.post('/generate-token', {
-      username: email,
-      password: password,
-    });
+    let dataUser = await axios.get(
+      'https://no-country-prueba.onrender.com/usuarios/'
+    );
+    dataUser = dataUser.data.filter((item) =>
+      item.username === email && password ? item : null
+    );
 
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token.data.token}`,
-      },
-    };
+    const dataClinic = await axios.get(
+      'https://no-country-prueba.onrender.com/clinica/'
+    );
 
-    const data = await axios.get('/actual-usuario', config);
-
-    const dataClinic = await axios.get('/clinica/', config);
-
-    const dataDoctor = await axios.get('/medicos/', config);
+    const dataDoctor = await axios.get(
+      'https://no-country-prueba.onrender.com/medicos/'
+    );
 
     dispatch({
       type: USER_LOGIN_SUCCESS,
-      payload: data,
+      payload: dataUser,
       clinic: dataClinic,
       doctor: dataDoctor,
     });
 
-    localStorage.setItem('userInfo', JSON.stringify(data));
+    localStorage.setItem('userInfo', JSON.stringify(dataUser));
     localStorage.setItem('clinicInfo', JSON.stringify(dataClinic));
     localStorage.setItem('doctorInfo', JSON.stringify(dataDoctor));
   } catch (error) {
@@ -53,10 +63,149 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
+export const getTurn = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: TURN_GET_REQUEST,
+    });
+
+    const user = JSON.parse(localStorage.getItem('userInfo'));
+
+    let getTurn = await axios.get(
+      `https://no-country-prueba.onrender.com/turnos/`
+    );
+    getTurn = getTurn.data.filter((item) => item.usuario.id === user[0].id);
+
+    dispatch({
+      type: TURN_GET_SUCCESS,
+      payload: getTurn,
+    });
+
+    localStorage.setItem('turnInfo', JSON.stringify(getTurn));
+  } catch (error) {
+    dispatch({
+      type: TURN_GET_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const createTurn = (medicId, date) => async (dispatch) => {
+  try {
+    dispatch({
+      type: TURN_CREATE_REQUEST,
+    });
+
+    const user = JSON.parse(localStorage.getItem('userInfo'));
+
+    const data = {
+      usuario: {
+        id: user[0].id,
+      },
+      medico: {
+        id: Number(medicId),
+      },
+      fecha: date,
+    };
+
+    let dataPost = await axios.post(
+      'https://no-country-prueba.onrender.com/turnos/',
+      data
+    );
+
+    dispatch({
+      type: TURN_CREATE_SUCCESS,
+      payload: dataPost,
+    });
+
+    dispatch(getTurn());
+  } catch (error) {
+    dispatch({
+      type: TURN_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const updateTurn = (id, medicId, date) => async (dispatch) => {
+  try {
+    dispatch({
+      type: TURN_UPDATE_REQUEST,
+    });
+
+    const user = JSON.parse(localStorage.getItem('userInfo'));
+
+    const data = {
+      id,
+      usuario: {
+        id: user[0].id,
+      },
+      medico: {
+        id: Number(medicId),
+      },
+      fecha: date,
+    };
+
+    let dataUpdate = await axios.put(
+      `https://no-country-prueba.onrender.com/turnos/`,
+      data
+    );
+
+    dispatch({
+      type: TURN_UPDATE_SUCCESS,
+      payload: dataUpdate,
+    });
+
+    dispatch(getTurn());
+  } catch (error) {
+    dispatch({
+      type: TURN_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const deleteTurn = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: TURN_DELETE_REQUEST,
+    });
+
+    const deletePost = await axios.delete(
+      `https://no-country-prueba.onrender.com/turnos/${id}`
+    );
+
+    dispatch({
+      type: TURN_DELETE_SUCCESS,
+      payload: deletePost,
+    });
+
+    dispatch(getTurn());
+  } catch (error) {
+    dispatch({
+      type: TURN_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo');
   localStorage.removeItem('clinicInfo');
   localStorage.removeItem('doctorInfo');
+  localStorage.removeItem('turnInfo');
   dispatch({ type: USER_LOGOUT });
 };
 
@@ -100,7 +249,10 @@ export const resetPassword = (password) => (dispatch) => {
 
 export const createUserForm = (data) => async (dispatch) => {
   try {
-    const create = await axios.post('/usuarios/', data);
+    const create = await axios.post(
+      'https://no-country-prueba.onrender.com/usuarios/',
+      data
+    );
 
     if (create.data.id) {
       return true;
