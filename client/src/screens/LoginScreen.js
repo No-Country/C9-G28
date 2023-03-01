@@ -23,7 +23,8 @@ const LoginScreen = () => {
   });
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { error, loading, userInfo } = userLogin;
+  const { userInfo } = userLogin;
+  
 
   useEffect(() => {
     if (userInfo) {
@@ -66,6 +67,12 @@ const LoginScreen = () => {
       input.password !== ''
     ) {
       dispatch(login(input.email, input.password));
+      if(!userLogin.loading){
+       
+        alert(
+          '¡Error Email o Contraseña incorrectos!'
+        );
+      }
     } else {
       alert(
         '¡Error al ingresar, Por favor revise los campos de Email y Contraseña!'
@@ -102,12 +109,11 @@ const LoginScreen = () => {
             label="Contraseña"
           />
 
-          <div className='flex items-center justify-center'>
+          <div className="flex items-center justify-center">
             <Link to={'/verificaremail'} className="mb-4 ml-4 text-blue-700">
               ¿Olvidaste tu contraseña?
             </Link>
           </div>
-          
 
           <div className="flex items-center justify-center mt-5">
             <button
@@ -119,7 +125,7 @@ const LoginScreen = () => {
           </div>
         </form>
         <div className="flex items-center justify-center">
-          <Link to={'/registrar'} className="mt-10 text-blue-700 ">
+          <Link to={'/register'} className="mt-10 text-blue-700 ">
             Registrarme
           </Link>
         </div>

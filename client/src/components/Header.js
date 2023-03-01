@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { AiOutlineMenu } from 'react-icons/ai';
 import { RiNotification3Line } from 'react-icons/ri';
@@ -26,8 +26,14 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 );
 
 const Header = () => {
+  const [screen, setScreen] = useState();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setScreen(window.innerWidth);
+  }, []);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -36,13 +42,26 @@ const Header = () => {
 
   return (
     <header className="bg-main-bg">
-      <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
-        <NavButton
-          title="Menu"
-          customFunc={() => {}}
-          color="white"
-          icon={<AiOutlineMenu />}
-        />
+      <div className="flex justify-between p-2 ml-2 md:ml-[70px] md:mr-6 relative">
+        {screen <= 600 ? (
+          <NavButton
+            title="Menu"
+            customFunc={() => {}}
+            color="white"
+            icon={<AiOutlineMenu />}
+          />
+        ) : (
+          <div className="flex items-center">
+            <h1 className="text-white font-extrabold text-3xl p-1">
+              <Link to="/">MediCare</Link>
+            </h1>
+
+            <h2 className="text-white font-bold text-sm px-10">
+              <Link to="/specialists">Agendar turno</Link>
+            </h2>
+          </div>
+        )}
+
         <div className="flex">
           <NavButton
             title="Notification"

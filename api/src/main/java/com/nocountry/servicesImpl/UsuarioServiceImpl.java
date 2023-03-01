@@ -1,6 +1,6 @@
 package com.nocountry.servicesImpl;
 
-import com.nocountry.models.Turno;
+import com.nocountry.excepciones.RegistroFoundException;
 import com.nocountry.models.Usuario;
 import com.nocountry.models.UsuarioRol;
 import com.nocountry.repository.RolRepository;
@@ -30,7 +30,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuarioLocal= usuarioRepository.findByUsername(usuario.getUsername());
         if(usuarioLocal != null){
             System.out.println("El usuario ya existe");
-            throw new Exception("El usuario ya está registrado");
+            throw new RegistroFoundException();
         }
         else {
             for(UsuarioRol usuarioRol : usuarioRols){

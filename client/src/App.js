@@ -8,7 +8,9 @@ import LoginScreen from './screens/LoginScreen';
 import ValidateCode from './screens/ValidateCode';
 import SpecialistScreen from './screens/SpecialistScreen';
 import ScheduleScreen from './screens/ScheduleScreen';
+import UpdateScheduleScreen from './screens/UpdateScheduleScreen';
 import ResetPassword from './screens/ResetPassword';
+import FormRegister from './screens/FormRegister';
 
 function App() {
   return (
@@ -16,11 +18,16 @@ function App() {
       <Routes>
         <Route path={'/'} element={<LoginScreen />} />
         <Route path={'/home'} element={<HomeScreen />} />
-        <Route path={'/verificaremail'} element={<VerificarEmail/>} />
-        <Route path={'/validatecode'} element={<ValidateCode/>} />
-        <Route path={'/resetpassword'} element={<ResetPassword/>} />
+        <Route path={'/verificaremail'} element={<VerificarEmail />} />
+        <Route path={'/validatecode'} element={<ValidateCode />} />
+        <Route path={'/resetpassword'} element={<ResetPassword />} />
         <Route path={'/specialists'} element={<SpecialistScreen />} />
-        <Route path={'/schedule'} element={<ScheduleScreen />} />
+        <Route path={'/schedule/:id'} element={<ScheduleScreen />} />
+        <Route
+          path={'/schedule/:medicId/update/:turnId'}
+          element={<UpdateScheduleScreen />}
+        />
+        <Route path={'/register'} element={<FormRegister />} />
       </Routes>
     </BrowserRouter>
   );

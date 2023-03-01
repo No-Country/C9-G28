@@ -1,6 +1,8 @@
 package com.nocountry.servicesImpl;
 
+import com.nocountry.excepciones.RegistroFoundException;
 import com.nocountry.models.Medico;
+import com.nocountry.models.Turno;
 import com.nocountry.models.Usuario;
 import com.nocountry.repository.MedicoRepository;
 import com.nocountry.services.MedicoService;
@@ -21,9 +23,21 @@ public class MedicoServiceImpl implements MedicoService {
     }
 
     @Override
-    public Medico saveMedico(Medico medico) {
-        return repository.save(medico);
+    public Medico saveMedico(Medico medico) throws Exception {
+
+        Medico medicLocal= repository.findByNombreAndApellido(medico.getNombre(), medico.getApellido());
+        if(medicLocal != null){
+            System.out.println("El medico ya existe");
+            throw new RegistroFoundException();
+        }
+        else {
+
+            medicLocal=repository.save(medico);
+        }
+
+        return medicLocal;
     }
+
 
     @Override
     public void deleteMedico(Long medicoId) {

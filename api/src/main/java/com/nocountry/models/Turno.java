@@ -1,6 +1,7 @@
 package com.nocountry.models;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -20,14 +22,21 @@ public class Turno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+   // @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+   // @JoinColumn(name = "paciente_id", nullable = false)
+   // private Paciente paciente;
+
+    //nueva relacion
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "paciente_id", nullable = false)
-    private Paciente paciente;
+    @JoinColumn(name = "usuario_id",nullable = false)
+    private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "medico_id", nullable = false)
     private Medico medico;
 
     @Column
-    private LocalDate fecha;
+     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+   // @JsonFormat(pattern="yyyy-MM-dd")
+    private Date fecha;
 }

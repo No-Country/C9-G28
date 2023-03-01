@@ -38,7 +38,7 @@ public class Paciente {
     private Date fechaIngreso;
 
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "paciente",fetch = FetchType.LAZY, orphanRemoval = true, cascade = {CascadeType.REMOVE, CascadeType.MERGE})
-    private Set<Turno> turnos=new HashSet<>();
+    //@JsonIgnore
+    //@OneToMany(mappedBy = "paciente",fetch = FetchType.LAZY, orphanRemoval = true, cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+    //private Set<Turno> turnos=new HashSet<>();
 }
