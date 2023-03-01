@@ -160,6 +160,7 @@ export default function Calendar(props) {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <StaticDateTimePicker
           locale={esLocale}
+          ampm={false}
           onChange={(newValue) => setValue(newValue)}
           value={value}
           renderInput={(params) => <TextField {...params} />}

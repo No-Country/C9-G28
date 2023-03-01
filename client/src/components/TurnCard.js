@@ -32,7 +32,7 @@ const TurnCard = ({ id, firstName, lastName, time, specialist, medicId }) => {
             <BiTime className="text-3xl mr-2" />
             <div className="flex flex-col">
               <p>
-                Turno: {date} a las {hour}
+                Turno: {date} a la(s) {hour}
               </p>
               {/* <p className="text-violet-900">Faltan 2 día(s)</p> */}
             </div>

@@ -39,8 +39,8 @@ const HomeScreen = () => {
         <div className="flex flex-col items-center">
           <p className="text-[27px] mx-10 md:text-[35px] font-bold md:text-[#6B7280] md:mb-10">
             {listTurns === undefined
-              ? 'Tus turnos'
-              : 'Aún no tienes turnos agendados'}
+              ? 'Aún no tienes turnos agendados'
+              : 'Tus turnos'}
           </p>
           {listTurns?.length > 0 ? (
             listTurns?.map((item) => (
