@@ -8,6 +8,7 @@ import LoginScreen from './screens/LoginScreen';
 import ValidateCode from './screens/ValidateCode';
 import SpecialistScreen from './screens/SpecialistScreen';
 import ScheduleScreen from './screens/ScheduleScreen';
+import UpdateScheduleScreen from './screens/UpdateScheduleScreen';
 import ResetPassword from './screens/ResetPassword';
 import FormRegister from './screens/FormRegister';
 
@@ -22,6 +23,10 @@ function App() {
         <Route path={'/resetpassword'} element={<ResetPassword />} />
         <Route path={'/specialists'} element={<SpecialistScreen />} />
         <Route path={'/schedule/:id'} element={<ScheduleScreen />} />
+        <Route
+          path={'/schedule/:medicId/update/:turnId'}
+          element={<UpdateScheduleScreen />}
+        />
         <Route path={'/register'} element={<FormRegister />} />
       </Routes>
     </BrowserRouter>

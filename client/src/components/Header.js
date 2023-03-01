@@ -57,11 +57,7 @@ const Header = () => {
             </h1>
 
             <h2 className="text-white font-bold text-sm px-10">
-              <Link to="/">Agendar turno</Link>
-            </h2>
-
-            <h2 className="text-white font-bold text-sm">
-              <Link to="/">Entidades</Link>
+              <Link to="/specialists">Agendar turno</Link>
             </h2>
           </div>
         )}

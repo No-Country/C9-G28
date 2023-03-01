@@ -15,7 +15,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { StaticDateTimePicker } from '@mui/x-date-pickers';
 import esLocale from 'date-fns/locale/es';
 
-import { createTurn } from '../actions/userActions';
+import { updateTurn } from '../actions/userActions';
 
 import {
   useLocaleText,
@@ -140,10 +140,10 @@ CustomActionBar.propTypes = {
   onSetToday: PropTypes.func.isRequired,
 };
 
-export default function Calendar(props) {
+export default function UpdateCalendar(props) {
   const dispatch = useDispatch();
 
-  const [value, setValue] = useState(dayjs(props.onSetToday));
+  const [value, setValue] = useState(dayjs(props.date[0].fecha));
 
   const dateTurn = `${value.$y}-${
     value.$M + 1 < 10 ? `0${value.$M + 1}` : value.$M + 1
@@ -152,7 +152,7 @@ export default function Calendar(props) {
   }:00`;
 
   const submitHandler = () => {
-    dispatch(createTurn(props.id, dateTurn));
+    dispatch(updateTurn(props.turnId, props.medicId, dateTurn));
   };
 
   return (

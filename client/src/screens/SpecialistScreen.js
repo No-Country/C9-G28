@@ -11,10 +11,27 @@ import Footer from '../components/Footer';
 import avatar from '../assets/avatar.jpg';
 
 const SpecialistScreen = () => {
-  const [filter, setFilter] = useState('');
-
   const userLogin = useSelector((state) => state.userLogin);
   const { doctorInfo } = userLogin;
+
+  const [searchInput, setSearchInput] = useState('');
+
+  const [filteredResults, setFilteredResults] = useState(doctorInfo.data);
+
+  const searchItems = (searchValue) => {
+    setSearchInput(searchValue);
+    if (searchInput !== '') {
+      const filteredData = doctorInfo.data.filter((item) => {
+        return Object.values(item)
+          .join('')
+          .toLowerCase()
+          .includes(searchInput.toLowerCase());
+      });
+      setFilteredResults(filteredData);
+    } else {
+      setFilteredResults(doctorInfo.data);
+    }
+  };
 
   return (
     <div>
@@ -26,7 +43,7 @@ const SpecialistScreen = () => {
 
       <div className="flex flex-col items-center">
         <div className="mx-7">
-          <form onSubmit={() => {}}>
+          <form onSubmit={(e) => {}}>
             <div className="absolute mt-3.5 ml-3 text-gray-700">
               <BsSearch />
             </div>
@@ -35,8 +52,8 @@ const SpecialistScreen = () => {
               type="text"
               name="searchSpecialist"
               placeholder={'Buscar especialistas'}
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
+              value={searchInput}
+              onChange={(e) => searchItems(e.target.value)}
             />
           </form>
         </div>
@@ -58,7 +75,7 @@ const SpecialistScreen = () => {
         </div>
 
         <div className="md:grid md:grid-cols-2 md:gap-4">
-          {doctorInfo.data.map((item) => (
+          {filteredResults.map((item) => (
             <SpecialistCard
               key={item.id}
               id={item.id}
