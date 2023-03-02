@@ -12,7 +12,7 @@ const SpecialistCard = ({
   specialist,
 }) => {
   return (
-    <div className="bg-white rounded-md shadow-2xl my-[16px] mx-auto w-[450px] h-[200px] p-[1px]">
+    <div className="bg-white rounded-md shadow-2xl my-[16px] mx-auto md:w-[450px] w-[390px] h-[200px] p-[1px]">
       <div>
         <div className="flex flex-row m-6">
           <div className="mr-5">

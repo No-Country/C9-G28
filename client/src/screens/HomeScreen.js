@@ -28,7 +28,7 @@ const HomeScreen = () => {
   const { listTurns } = turns;
 
   return (
-    <div>
+    <div className="w-screen">
       <Header />
 
       <p className="text-[40px] font-bold mx-10 md:mx-20 mt-10 text-blueDeep">
@@ -38,7 +38,7 @@ const HomeScreen = () => {
       <div className="flex flex-col md:items-center md:bg-[#EEF2FF] md:mx-[200px] md:my-10 md:p-10">
         <div className="flex flex-col items-center">
           <p className="text-[27px] mx-10 md:text-[35px] font-bold md:text-[#6B7280] md:mb-10">
-            {listTurns === undefined
+            {listTurns?.length === 0
               ? 'Aún no tienes turnos agendados'
               : 'Tus turnos'}
           </p>

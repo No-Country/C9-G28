@@ -16,10 +16,10 @@ const TurnCard = ({ id, firstName, lastName, time, specialist, medicId }) => {
   };
 
   return (
-    <div className="flex items-center justify-between bg-white rounded-md shadow-2xl w-[450px] md:w-[700px] h-[150px] md:h-[100px] mt-5 px-5 md:px-10">
+    <div className="flex flex-col md:flex-row items-center md:justify-between bg-white rounded-md shadow-2xl w-[390px] md:w-[700px] h-[150px] md:h-[100px] mt-5 px-5 md:px-10">
       <div className="flex flex-row">
         <div>
-          <div className="flex flex-row items-center my-1">
+          <div className="flex flex-row items-center justify-center md:justify-start md:my-1 my-5">
             <h5 className="font-semibold md:mr-5">
               {firstName} {lastName}
             </h5>
@@ -28,7 +28,7 @@ const TurnCard = ({ id, firstName, lastName, time, specialist, medicId }) => {
             </div>
           </div>
 
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center mb-3 md:mb-0">
             <BiTime className="text-3xl mr-2" />
             <div className="flex flex-col">
               <p>
@@ -39,11 +39,11 @@ const TurnCard = ({ id, firstName, lastName, time, specialist, medicId }) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center ">
         <Link
           to="/"
           onClick={submitHandlerDelete}
-          className="btn btn-danger text-red-600 md:mr-10"
+          className="btn btn-danger text-red-600 mr-10"
         >
           Cancelar turno
         </Link>
